@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Task</title>
+  </head>
+  <body>
+	<div>
+		<button onClick="Javascript:newTask(elem, this.parentNode);">test</button>
+	</div>
+	<script type="text/javascript" src="js/Meta_Element.js" ></script>
+	<script type="text/javascript">
+		const fs = require('fs');
+		const spawn = require('child_process').spawn;
+
+		var	mods = [],
+			elem = createElements(
+		{
+			tag:"div",
+			child:
+			[
+				{
+					tag:"select",
+				},
+			],
+		})[0],
+			select = elem.querySelector('select');
+		fs.readdir("./mods/", function(err, files)
+		{
+			var	l_mods = files.length;
+			for(var i = 0, l = files.length; i < l; i++)
+			{
+				mods.push(
+				{
+					tag:"option",
+					value:"./mods/"+ files[i],
+					child:files[i],
+				});
+			}
+			mods = createElements(mods);
+			l_mods = mods.length;
+			for (var i = 0; i < l_mods; i++)
+				select.appendChild(mods[i]);
+		});
+
+		function newTask( elem, node )
+		{
+			node.appendChild(elem);
+		}
+
+		// const ls = spawn('ls', ['-lh', '/usr']);
+		// ls.stdout.on('data', function(data)
+		// {
+		// 	console.log(`stdout: ${data}`);
+		// });
+		//
+		// ls.stderr.on('data', function(data)
+		// {
+		// 	console.log(`stderr: ${data}`);
+		// });
+		//
+		// ls.on('close', function(code)
+		// {
+		// 	console.log(`child process exited with code ${code}`);
+		// });
+	</script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+	"name":"Test",
+	"spawn":"Test.rb",
+	"params":0,
+	"default":{},
+}
